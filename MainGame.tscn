@@ -12,7 +12,8 @@ script = ExtResource("1_ub1h1")
 [node name="Map" parent="MapLoader" instance=ExtResource("2_nja3v")]
 
 [node name="Player" parent="." instance=ExtResource("3_e5dns")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+transform = Transform3D(1, -0.000273554, 0.000219806, 0.000273588, 1, -0.0002287, -0.000219763, 0.000228741, 1, 0, 1.15, 0)
+MoveForce = 10.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 15)
