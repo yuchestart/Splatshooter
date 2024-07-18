@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://lbimbpw1k5h8"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nefny"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_d2reo"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_tv11k"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2quob"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qwskr"]
+size = Vector3(14, 0, 14)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xlfh4"]
+size = Vector2(14, 14)
+
+[node name="Map" type="Node3D"]
+
+[node name="WorldBorder" type="StaticBody3D" parent="."]
+
+[node name="North" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -7)
+shape = SubResource("WorldBoundaryShape3D_nefny")
+
+[node name="South" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 7)
+shape = SubResource("WorldBoundaryShape3D_d2reo")
+
+[node name="East" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 7, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_tv11k")
+
+[node name="West" type="CollisionShape3D" parent="WorldBorder"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -7, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_2quob")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_qwskr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0163903, 0.00776482, 2.86102e-05)
+mesh = SubResource("PlaneMesh_xlfh4")
