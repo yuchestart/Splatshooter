@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba7w0hqkyiyou"]
+[gd_scene load_steps=4 format=3 uid="uid://c3qhjj2vkjjwj"]
 
 [ext_resource type="Script" path="res://MapLoader.cs" id="1_ub1h1"]
 [ext_resource type="PackedScene" uid="uid://lbimbpw1k5h8" path="res://Resources/Maps/PlaceholderMap.tscn" id="2_nja3v"]
-[ext_resource type="PackedScene" uid="uid://csb6yh8n0hbcb" path="res://Resources/Player/Player.tscn" id="3_e5dns"]
+[ext_resource type="PackedScene" uid="uid://dlcxlvhe048nw" path="res://Resources/Player/Player.tscn" id="3_e5dns"]
 
 [node name="Root" type="Node3D"]
 
@@ -12,8 +12,8 @@ script = ExtResource("1_ub1h1")
 [node name="Map" parent="MapLoader" instance=ExtResource("2_nja3v")]
 
 [node name="Player" parent="." instance=ExtResource("3_e5dns")]
-transform = Transform3D(1, -0.000273554, 0.000219806, 0.000273588, 1, -0.0002287, -0.000219763, 0.000228741, 1, 0, 1.15, 0)
-MoveForce = 10.0
+transform = Transform3D(1, -0.000273554, 0.000219806, 0.000273588, 1, -0.0002287, -0.000219763, 0.000228741, 1, 0, 0.612559, 0)
+current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 15)
