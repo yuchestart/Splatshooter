@@ -1,12 +1,11 @@
-using Godot;
+﻿using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class Player : CharacterBody3D
 {
 	[Export]
 	public bool current = false;
-	[Export]
-	public bool mouseActivated = false;
 
 	[Export]
 	private float moveSpeed = 5.0f;
@@ -17,8 +16,12 @@ public partial class Player : CharacterBody3D
 	[Export]
 	private float mouseSensitivity = 0.1f;
 
+	public float health = 100;
+
 	private Camera3D camera;
 	private Vector3 _velocity = Vector3.Zero;
+	private double healthRegenTimer = 0;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -27,12 +30,15 @@ public partial class Player : CharacterBody3D
 		{
 			camera = GetNode<Camera3D>("Camera");
 			camera.Current = true;
+			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
+
+		AddToGroup("players");
 	}
 
     public override void _Input(InputEvent @event)
     {
-		if (current && mouseActivated)
+		if (current && (!App.IsPaused) && App.GameState == GameStateEnum.InGame)
 		{
 			PlayerRotation(@event);
 		}
@@ -58,7 +64,7 @@ public partial class Player : CharacterBody3D
 		} else
 		{
 			_velocity.Y = 0;
-			if (Input.IsActionJustPressed("movement_jump"))
+			if (Input.IsActionPressed("movement_jump") && (!App.IsPaused) && App.GameState == GameStateEnum.InGame)
 			{
 				_velocity.Y = jumpForce;
 			}
@@ -69,11 +75,42 @@ public partial class Player : CharacterBody3D
 		MoveAndSlide();
     }
 
+    public override void _Process(double delta)
+    {
+
+		if (current)
+		{
+			healthRegenTimer += delta;
+			if (healthRegenTimer >= 0.5)
+			{
+				health += 1;
+				healthRegenTimer = 0;
+			}
+		}
+
+    }
+
+	public void TakeDamage(float damage)
+	{
+		health -= damage;
+		if (health <= 0)
+			Die();
+	}
+
+	public void Die()
+	{
+		//TODO: Implement death
+		GD.Print("Looks like somebody died💀");
+		current = false;
+	}
+
     #region Client movement
 
     private void PlayerMovement(double delta)
 	{
-		if (Input.IsActionPressed("movement_forward"))
+		if (App.IsPaused)
+			return;
+        if (Input.IsActionPressed("movement_forward"))
 		{
 			_velocity.Z -= moveSpeed;
 		}

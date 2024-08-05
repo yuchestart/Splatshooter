@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlcxlvhe048nw"]
+[gd_scene load_steps=5 format=3 uid="uid://dlcxlvhe048nw"]
 
 [ext_resource type="Script" path="res://Resources/Player/Player.cs" id="1_c3xei"]
+[ext_resource type="PackedScene" uid="uid://c34vqdw0npppq" path="res://Resources/HUD/HUD.tscn" id="2_arx4g"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kktpn"]
 
@@ -8,14 +9,15 @@
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_c3xei")
+jumpForce = 5.0
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_kktpn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_8s5ee")
+
+[node name="HUD" parent="." instance=ExtResource("2_arx4g")]
