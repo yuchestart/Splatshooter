@@ -1,0 +1,107 @@
+[gd_scene load_steps=3 format=3 uid="uid://c34vqdw0npppq"]
+
+[ext_resource type="Texture2D" uid="uid://b3xtthq0s0asi" path="res://Resources/Weapons/PlaceholderWeapon/crosshair.svg" id="1_8sbh8"]
+[ext_resource type="Script" path="res://Resources/HUD/PauseMenu.cs" id="2_ot01n"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Cursor" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CursorImage" type="TextureRect" parent="Cursor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8sbh8")
+expand_mode = 1
+
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 576.0
+offset_top = 324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ot01n")
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.0
+anchor_top = -1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 577.0
+offset_top = 322.0
+offset_right = -576.0
+offset_bottom = -324.0
+color = Color(0, 0, 0, 0.188235)
+
+[node name="PauseUI" type="FlowContainer" parent="PauseMenu"]
+layout_mode = 0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -258.0
+offset_bottom = -245.0
+
+[node name="Label" type="Label" parent="PauseMenu/PauseUI"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Game Paused"
+
+[node name="ResumeGame" type="Button" parent="PauseMenu/PauseUI"]
+layout_mode = 2
+text = "Resume Game
+"
+
+[node name="VersionString" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="VersionString"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -501.0
+offset_top = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Splatshooter Pre-Alpha
+Splatshooter is open source and is licensed under the MIT licence."
+horizontal_alignment = 2
+
+[connection signal="pressed" from="PauseMenu/PauseUI/ResumeGame" to="PauseMenu" method="OnResumeGamePressed"]
