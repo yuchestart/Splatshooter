@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://lbimbpw1k5h8"]
+[gd_scene load_steps=11 format=3 uid="uid://lbimbpw1k5h8"]
+
+[ext_resource type="Texture2D" uid="uid://4c8vbjcvs5dn" path="res://Resources/Maps/PlaceholderMap/skybox.jpg" id="1_6ti48"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nefny"]
 
@@ -13,6 +15,16 @@ size = Vector3(14, 0, 14)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xlfh4"]
 size = Vector2(14, 14)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tvu7d"]
+panorama = ExtResource("1_6ti48")
+
+[sub_resource type="Sky" id="Sky_m2b1x"]
+sky_material = SubResource("PanoramaSkyMaterial_tvu7d")
+
+[sub_resource type="Environment" id="Environment_3udet"]
+background_mode = 2
+sky = SubResource("Sky_m2b1x")
 
 [node name="Map" type="Node3D"]
 
@@ -42,3 +54,6 @@ shape = SubResource("BoxShape3D_qwskr")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0163903, 0.00776482, 2.86102e-05)
 mesh = SubResource("PlaneMesh_xlfh4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3udet")
