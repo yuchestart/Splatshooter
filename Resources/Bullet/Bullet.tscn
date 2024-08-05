@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://crkcw7vgfbx5s"]
+
+[ext_resource type="Script" path="res://Resources/Bullet/Bullet.cs" id="1_acnp6"]
+
+[node name="Bullet" type="Area3D"]
+script = ExtResource("1_acnp6")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+
+[node name="Annotation" type="Marker3D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
