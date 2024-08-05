@@ -16,9 +16,6 @@ script = ExtResource("1_ub1h1")
 transform = Transform3D(1, -0.000273554, 0.000219806, 0.000273588, 1, -0.0002287, -0.000219763, 0.000228741, 1, 0, 1.61256, 4.26037)
 current = true
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 15)
-
 [node name="Bullet" parent="." instance=ExtResource("4_cp7ia")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38298, 0)
 bulletSize = 1.0
