@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Splatshooter"
-run/main_scene="res://MainGame.tscn"
+run/main_scene="res://Gameplay.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.png"
 
@@ -90,3 +90,4 @@ hud_pause={
 [layer_names]
 
 3d_physics/layer_1="PlayerCollidable"
+3d_physics/layer_2="Bullet Collidable"
