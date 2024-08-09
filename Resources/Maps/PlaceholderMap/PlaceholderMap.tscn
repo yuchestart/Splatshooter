@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://lbimbpw1k5h8"]
+[gd_scene load_steps=8 format=3 uid="uid://lbimbpw1k5h8"]
 
-[ext_resource type="Texture2D" uid="uid://4c8vbjcvs5dn" path="res://Resources/Maps/PlaceholderMap/skybox.jpg" id="1_6ti48"]
+[ext_resource type="Environment" uid="uid://b405hhnrdkf1r" path="res://Resources/Maps/PlaceholderMap/Environment.tres" id="1_i067c"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nefny"]
 
