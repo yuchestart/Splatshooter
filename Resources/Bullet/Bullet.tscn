@@ -3,11 +3,14 @@
 [ext_resource type="Script" path="res://Resources/Bullet/Bullet.cs" id="1_acnp6"]
 
 [node name="Bullet" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_acnp6")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+cast_shadow = 2
 
 [node name="Annotation" type="Marker3D" parent="."]
 
