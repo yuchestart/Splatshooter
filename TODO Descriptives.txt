@@ -1,0 +1,5 @@
+﻿GH issues exists but I'm being a dumbass so
+
+Descriptive #1:
+Bullets are globs of paint, therefore upon hitting an object it should disperse all of it's contents(well not to accurate, I'm not including a physics simulation).
+My suggestion is to make damage proportional to the volume of the sphere, as damage in this case is the amount of paint that the player is covered by, not the force(it's more like paintball).
