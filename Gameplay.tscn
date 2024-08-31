@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3qhjj2vkjjwj"]
+[gd_scene load_steps=5 format=3 uid="uid://c3qhjj2vkjjwj"]
 
+[ext_resource type="Script" path="res://Game.cs" id="1_kvox1"]
 [ext_resource type="Script" path="res://MapLoader.cs" id="1_ub1h1"]
 [ext_resource type="PackedScene" uid="uid://lbimbpw1k5h8" path="res://Resources/Maps/PlaceholderMap/PlaceholderMap.tscn" id="2_nja3v"]
 [ext_resource type="PackedScene" uid="uid://dlcxlvhe048nw" path="res://Resources/Player/Player.tscn" id="3_e5dns"]
 
 [node name="Root" type="Node3D"]
+script = ExtResource("1_kvox1")
 
 [node name="MapLoader" type="Node3D" parent="."]
 script = ExtResource("1_ub1h1")
