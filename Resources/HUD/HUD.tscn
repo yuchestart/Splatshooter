@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://c34vqdw0npppq"]
 
-[ext_resource type="Texture2D" uid="uid://b3xtthq0s0asi" path="res://Resources/Weapons/PlaceholderWeapon/crosshair.svg" id="1_8sbh8"]
+[ext_resource type="Script" path="res://Resources/HUD/CrosshairController.cs" id="1_x14dn"]
 [ext_resource type="Script" path="res://Resources/HUD/PauseMenu.cs" id="2_ot01n"]
 
 [node name="HUD" type="CanvasLayer"]
 
-[node name="Cursor" type="Control" parent="."]
+[node name="Crosshair" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -16,22 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="CursorImage" type="TextureRect" parent="Cursor"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_8sbh8")
-expand_mode = 1
+script = ExtResource("1_x14dn")
 
 [node name="PauseMenu" type="Control" parent="."]
 visible = false
