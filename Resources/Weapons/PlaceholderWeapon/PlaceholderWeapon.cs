@@ -6,16 +6,17 @@ public partial class PlaceholderWeapon : Weapon
     public override void PrimaryFire()
     {
         Bullet mybullet = new Bullet();
+        mybullet.Position = 
     }
 
     public override void SecondaryFire()
     {
-        throw new NotImplementedException();
+        
     }
 
     public override void Reload()
     {
-        throw new NotImplementedException();
+
     }
     
 }
