@@ -12,6 +12,8 @@ public partial class Player : CharacterBody3D
 	[Export]
 	private float jumpForce = 10.0f;
 	[Export]
+	private float friction = 0.1f;
+	[Export]
 	private float gravityAcceleration = -ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 	[Export]
 	private float mouseSensitivity = 0.1f;
@@ -38,7 +40,7 @@ public partial class Player : CharacterBody3D
 
     public override void _Input(InputEvent @event)
     {
-		if (current && (!App.IsPaused) && App.GameState == GameStateEnum.InGame)
+		if (current && (!App.IsPaused) && App.GameMode == GameModeEnum.InGame)
 		{
 			PlayerRotation(@event);
 		}
@@ -64,7 +66,7 @@ public partial class Player : CharacterBody3D
 		} else
 		{
 			_velocity.Y = 0;
-			if (Input.IsActionPressed("movement_jump") && (!App.IsPaused) && App.GameState == GameStateEnum.InGame)
+			if (Input.IsActionPressed("movement_jump") && (!App.IsPaused) && App.GameMode == GameModeEnum.InGame)
 			{
 				_velocity.Y = jumpForce;
 			}
@@ -104,6 +106,8 @@ public partial class Player : CharacterBody3D
 		current = false;
 	}
 
+    #region Client
+
     #region Client movement
 
     private void PlayerMovement(double delta)
@@ -142,11 +146,17 @@ public partial class Player : CharacterBody3D
 
     #endregion
 
+
+    #endregion
+
+    #region Multiplayer
+
     #region Multiplayer movement
     private void MultiplayerMovement(double delta) { }
 
 	private void MultiplayerRotation(double delta) { }
 
-	#endregion
+    #endregion
 
+    #endregion
 }
