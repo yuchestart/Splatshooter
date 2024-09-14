@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 
-//I'm taking advantage of partial classes to split things up a little
 public partial class Player : CharacterBody3D
 {
-    //NOTE: Current limit for weapons is 5. We can change things up if required.
+    /// <summary>
+    /// The player's inventory of weapons.
+    /// NOTE: Current limit for weapons is 5. We can change things up if required.
+    /// </summary>
     private List<Weapon> inventory = new List<Weapon>();
     private int selectedWeapon = -1;
 
