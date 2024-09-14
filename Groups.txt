@@ -1,0 +1,5 @@
+﻿This is a quick reference to all the groups nodes will use.
+If you add a group, please list it below:
+
+"players"
+"bullets"
