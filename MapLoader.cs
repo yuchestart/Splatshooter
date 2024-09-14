@@ -11,18 +11,25 @@ public partial class MapLoader : Node3D
 	{
 		//Right now MapLoader just loads placeholder map
 		//TODO: Remove this call once things are good to go
+		
 		LoadMap("PlaceholderMap");
 	}
 
 
-	public Node3D LoadMap(string MapName)
+	public Node3D? LoadMap(string MapName)
 	{
 		if(!(CurrentMap == null))
 		{
             CurrentMap.QueueFree();
         }
-		
+
 		PackedScene scene = ResourceLoader.Load<PackedScene>("res://Maps/" + MapName + "/" + MapName + ".tscn");
+
+		if (scene == null)
+		{
+			GD.Print("Failed to load map");
+			return null;
+		}
 
 		CurrentMap = scene.Instantiate<Node3D>();
 
