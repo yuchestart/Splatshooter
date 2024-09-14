@@ -4,7 +4,8 @@ using System.Diagnostics;
 
 public partial class Player : CharacterBody3D
 {
-	[Export]
+    #region Editor Fields
+    [Export]
 	public bool current = false;
 
 	[Export]
@@ -17,26 +18,38 @@ public partial class Player : CharacterBody3D
 	private float gravityAcceleration = -ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 	[Export]
 	private float mouseSensitivity = 0.1f;
-
+    #endregion
+    public Guid UUID;
+	public Vector3 aim = Vector3.Zero;
+	
 	public float health = 100;
 
 	private Camera3D camera;
 	private Vector3 _velocity = Vector3.Zero;
 	private double healthRegenTimer = 0;
 
+	public static Player CreatePlayer()
+	{
+		Player player = (Player)GD.Load<PackedScene>("res://Resources/Player/Player.tscn").Instantiate();
+		return player;
+	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		if (current)
-		{
-			camera = GetNode<Camera3D>("Camera");
-			camera.Current = true;
-			Input.MouseMode = Input.MouseModeEnum.Captured;
-		}
 
-		AddToGroup("players");
-	}
+        UUID = Guid.NewGuid();
+        if (current)
+        {
+            camera = GetNode<Camera3D>("Camera");
+            camera.Current = true;
+            Input.MouseMode = Input.MouseModeEnum.Captured;
+        }
+
+        AddToGroup("players");
+
+        InitializeWeapons();
+    }
 
     public override void _Input(InputEvent @event)
     {
@@ -48,6 +61,8 @@ public partial class Player : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+		HandleWeaponInputs();
+
 		_velocity.X = 0;
 		_velocity.Z = 0;
 
@@ -89,7 +104,7 @@ public partial class Player : CharacterBody3D
 				healthRegenTimer = 0;
 			}
 		}
-
+		aim = -camera.GlobalTransform.Basis.Z;
     }
 
 	public void TakeDamage(float damage)
