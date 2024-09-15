@@ -13,5 +13,3 @@ script = ExtResource("1_acnp6")
 cast_shadow = 2
 
 [node name="Annotation" type="Marker3D" parent="."]
-
-[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

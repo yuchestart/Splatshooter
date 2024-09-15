@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Godot.Collections;
 using System;
 using System.Diagnostics;
 
@@ -22,8 +23,9 @@ public partial class Bullet : Area3D
 
     private CollisionShape3D collider;
     private MeshInstance3D meshInstance;
-    private Vector3 _velocity;
+    private Vector3 velocity;
     private float mass;
+    private Vector3 nextPosition;
 
 
     public static Bullet CreateBullet()
@@ -76,7 +78,7 @@ public partial class Bullet : Area3D
         sphereMesh.Material = material;
         meshInstance.Mesh = sphereMesh;
 
-        _velocity = bulletInitialVelocity;
+        velocity = bulletInitialVelocity;
 
         AddToGroup("bullets");
 
@@ -85,10 +87,11 @@ public partial class Bullet : Area3D
 
     public override void _PhysicsProcess(double delta)
     {
-        _velocity.Y += gravityAcceleration * (float)delta;
+        velocity.Y += gravityAcceleration * (float)delta;
 
-        Position += _velocity;
+        nextPosition = Position + velocity * (float)delta;
 
+        DetectCollision(delta);
 
     }
 
@@ -114,16 +117,40 @@ public partial class Bullet : Area3D
         meshInstance.Mesh = sphereMesh;
     }
 
+    private void DetectCollision(double delta)
+    {
+
+        PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
+        PhysicsShapeQueryParameters3D queryParameters = new();
+        queryParameters.Shape = collider.Shape;
+        queryParameters.Transform = Transform;
+        queryParameters.Motion = velocity * (float)delta;
+        queryParameters.CollisionMask = (1 << 1);
+
+        Array<Dictionary> collisions = spaceState.IntersectShape(queryParameters,4);
+
+        if(collisions.Count > 0)
+        {
+            foreach(Dictionary result in collisions)
+            {
+                Node3D collider = (Node3D)result["collider"];
+                OnBodyEntered(collider);
+            }
+        }
+        Position = nextPosition;
+    }
 
     private void OnBodyEntered(Node3D body)
     {
+        //GD.Print(body.GetType());
         //return; //Currently do nothing
         if (body.GetGroups().Contains("players"))
         {
             Player player = (Player)body;
             if (player.UUID == firedBy) //Prevent the player from dying to their own shot
                 return;
-            player.TakeDamage(bulletSize); //TODO: Implement accurate bullet damage based on bullet size. See Descriptive #1 for more details.
+            
+            player.TakeDamage(30); //TODO: Implement accurate bullet damage based on bullet size. See Descriptive #1 for more details.
         }
         if (body.GetGroups().Contains("bullets"))
         {
