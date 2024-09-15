@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://lbimbpw1k5h8"]
+[gd_scene load_steps=8 format=3 uid="uid://lbimbpw1k5h8"]
 
 [ext_resource type="Environment" uid="uid://b405hhnrdkf1r" path="res://Maps/PlaceholderMap/Environment.tres" id="1_i067c"]
-[ext_resource type="PackedScene" uid="uid://dlcxlvhe048nw" path="res://Resources/Player/Player.tscn" id="2_034o0"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nefny"]
 
@@ -54,6 +53,3 @@ environment = ExtResource("1_i067c")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(1, 0, 0, 0, 0.980133, 0.198342, 0, -0.198342, 0.980133, 0, 2, 0)
 directional_shadow_blend_splits = true
-
-[node name="Player" parent="." instance=ExtResource("2_034o0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59802, 2.34573, -4.87807)
