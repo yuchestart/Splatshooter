@@ -24,33 +24,23 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 576.0
-offset_top = 324.0
-offset_right = 576.0
-offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_ot01n")
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -1.0
-anchor_top = -1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 577.0
-offset_top = 322.0
-offset_right = -576.0
-offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.188235)
 
 [node name="PauseUI" type="FlowContainer" parent="PauseMenu"]
-layout_mode = 0
-offset_left = -576.0
-offset_top = -324.0
-offset_right = -258.0
-offset_bottom = -245.0
+layout_mode = 1
+offset_right = 318.0
+offset_bottom = 102.0
 
 [node name="Label" type="Label" parent="PauseMenu/PauseUI"]
 layout_mode = 2
