@@ -15,7 +15,7 @@ public partial class PauseMenu : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("hud_pause") && App.GameMode == GameModeEnum.InGame)
+		if (Input.IsActionJustPressed("hud_pause") && App.GameMode == GameModeEnum.InGame && !App.IsPaused)
 		{
 			TogglePause();
 		}
@@ -23,20 +23,25 @@ public partial class PauseMenu : Control
 
 	public void TogglePause()
 	{
-        App.IsPaused = !App.IsPaused;
+
+		//GD.Print(Input.IsActionJustPressed("hud_pause")," ",App.GameMode);
+
+		App.IsPaused = !App.IsPaused;
         Visible = App.IsPaused;
-        if (App.IsPaused && Input.MouseMode == Input.MouseModeEnum.Captured)
+        if (App.IsPaused)
         {
             Input.MouseMode = Input.MouseModeEnum.Visible;
         }
-        else if (!App.IsPaused && Input.MouseMode != Input.MouseModeEnum.Captured)
+        else
         {
             Input.MouseMode = Input.MouseModeEnum.Captured;
         }
+		//GD.Print(Input.MouseMode);
     }
 
 	public void OnResumeGamePressed()
 	{
+		//GD.Print("Oh boy.");
 		TogglePause();
 	}
 }
