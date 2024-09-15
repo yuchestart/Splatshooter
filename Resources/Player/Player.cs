@@ -6,7 +6,7 @@ public partial class Player : CharacterBody3D
 {
     #region Editor Fields
     [Export]
-	public bool current = false;
+	public bool isLocalPlayer = false;
 
 	[Export]
 	private float moveSpeed = 5.0f;
@@ -39,53 +39,29 @@ public partial class Player : CharacterBody3D
 	{
 
         UUID = Guid.NewGuid();
-        if (current)
-        {
-            camera = GetNode<Camera3D>("Camera");
-            camera.Current = true;
-            Input.MouseMode = Input.MouseModeEnum.Captured;
-        }
 
         AddToGroup("players");
 
+        InitializeClient();
+		InitializeServer();
         InitializeWeapons();
     }
 
     public override void _Input(InputEvent @event)
     {
-		if (current && (!App.IsPaused) && App.GameMode == GameModeEnum.InGame)
+		if (!isLocalPlayer)
+			return;
+        if ((!App.IsPaused) && App.GameMode == GameModeEnum.InGame)
 		{
-			PlayerRotation(@event);
+			ClientRotation(@event);
 		}
     }
 
     public override void _PhysicsProcess(double delta)
     {
-		HandleWeaponInputs();
 
-		_velocity.X = 0;
-		_velocity.Z = 0;
-
-		if (current)
-		{
-			PlayerMovement(delta);
-		} else
-		{
-			MultiplayerMovement(delta);
-			MultiplayerRotation(delta);
-		}
-
-		if(!IsOnFloor())
-		{
-			_velocity.Y += gravityAcceleration * (float) delta;
-		} else
-		{
-			_velocity.Y = 0;
-			if (Input.IsActionPressed("movement_jump") && (!App.IsPaused) && App.GameMode == GameModeEnum.InGame)
-			{
-				_velocity.Y = jumpForce;
-			}
-		}
+		ClientPhysicsProcess(delta);
+		ServerPhysicsProcess(delta);
 
 		Velocity = GlobalTransform.Basis * _velocity;
 
@@ -94,17 +70,9 @@ public partial class Player : CharacterBody3D
 
     public override void _Process(double delta)
     {
-
-		if (current)
-		{
-			healthRegenTimer += delta;
-			if (healthRegenTimer >= 0.5)
-			{
-				health += 1;
-				healthRegenTimer = 0;
-			}
-		}
-		aim = -camera.GlobalTransform.Basis.Z;
+		ClientProcess(delta);
+		ServerProcess(delta);
+		
     }
 
 	public void TakeDamage(float damage)
@@ -118,60 +86,6 @@ public partial class Player : CharacterBody3D
 	{
 		//TODO: Implement death
 		GD.Print("Looks like somebody died💀");
-		current = false;
+		isLocalPlayer = false;
 	}
-
-    #region Client
-
-    #region Client movement
-
-    private void PlayerMovement(double delta)
-	{
-		if (App.IsPaused)
-			return;
-        if (Input.IsActionPressed("movement_forward"))
-		{
-			_velocity.Z -= moveSpeed;
-		}
-        if (Input.IsActionPressed("movement_backward"))
-        {
-            _velocity.Z += moveSpeed;
-        }
-        if (Input.IsActionPressed("movement_left"))
-        {
-            _velocity.X -= moveSpeed;
-        }
-        if (Input.IsActionPressed("movement_right"))
-        {
-            _velocity.X += moveSpeed;
-        }
-    }
-
-	private void PlayerRotation(InputEvent @event)
-	{
-        if (@event is InputEventMouseMotion mouseEvent)
-        {
-            RotateY(Mathf.DegToRad(-mouseEvent.Relative.X * mouseSensitivity));
-            camera.RotateX(Mathf.DegToRad(-mouseEvent.Relative.Y * mouseSensitivity));
-            Vector3 cameraRotation = camera.Rotation;
-			cameraRotation.X = Mathf.Clamp(cameraRotation.X, -Mathf.Pi/2, Mathf.Pi/2);
-			camera.Rotation = cameraRotation;
-        }
-    }
-
-    #endregion
-
-
-    #endregion
-
-    #region Multiplayer
-
-    #region Multiplayer movement
-    private void MultiplayerMovement(double delta) { }
-
-	private void MultiplayerRotation(double delta) { }
-
-    #endregion
-
-    #endregion
 }
