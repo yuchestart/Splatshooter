@@ -11,5 +11,3 @@ script = ExtResource("1_acnp6")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 cast_shadow = 2
-
-[node name="Annotation" type="Marker3D" parent="."]
