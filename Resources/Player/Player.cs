@@ -21,7 +21,7 @@ public partial class Player : CharacterBody3D
     #endregion
     public Guid UUID;
 	public Vector3 aim = Vector3.Zero;
-	
+	[Export]
 	public float health = 100;
 
 	private Camera3D camera;
