@@ -13,6 +13,9 @@ script = ExtResource("1_kvox1")
 transform = Transform3D(1, -0.000273554, 0.000219806, 0.000273588, 1, -0.0002287, -0.000219763, 0.000228741, 1, 0, 1.61256, 4.26037)
 isLocalPlayer = true
 
+[node name="Player2" parent="PlayersContainer" instance=ExtResource("3_e5dns")]
+transform = Transform3D(1, -0.000273554, 0.000219806, 0.000273588, 1, -0.0002287, -0.000219763, 0.000228741, 1, 0, 1.61256, -3.91256)
+
 [node name="MapLoader" type="Node3D" parent="."]
 script = ExtResource("1_ub1h1")
 
