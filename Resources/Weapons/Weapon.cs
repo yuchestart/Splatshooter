@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public abstract partial class Weapon : Node
+public abstract partial class Weapon : Node3D
 {
 
     protected Player parent;
-
+    
     public Weapon(Player parent)
     {
         this.parent = parent;
